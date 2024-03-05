@@ -1,28 +1,35 @@
 package org;
+import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MyFirstActionSelenium {
-    public static void main(String[] args) {
+
+
+    @Test
+    public static void main(String[] args){
+
         // Spécifiez l'emplacement du chromedriver.exe
-        System.setProperty("webdriver.chrome.driver", "C:\\CPBS_Framework_Automation\\drivers\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver" , "C:\\CPBS_Framework_Automation\\drivers\\chromedriver.exe");
+
 
         // Initialisez le WebDriver pour Chrome
         WebDriver driver = new ChromeDriver();
 
-        driver.get("https://www.google.com");
-
         // Naviguer vers l'URL de votre site web
-      /*  driver.get("https://www.boulanger.com/");
+        driver.get("https://www.paruvendu.fr/");
 
         // Deletes all the cookies
-        driver.manage().deleteAllCookies();
+       driver.manage().deleteAllCookies();
 
-        WebElement boutonMeConnecter = driver.findElement(By.xpath("//button[contains(text(), 'Me connecter')]"));
-        boutonMeConnecter.click();
+        driver.findElement(By.xpath("//button[contains(text(), 'Me connecter')]")).click();
 
         WebElement boutonNvCompte = driver.findElement(By.xpath("//button[contains(text(), 'Créer mon compte')]"));
         boutonNvCompte.click();
@@ -50,10 +57,13 @@ public class MyFirstActionSelenium {
         driver.findElement(By.id("city")).sendKeys("Tunis");
 
         Select tel = new Select(driver.findElement(By.name("contactPhoneNumberIndicator")));
-        pays.selectByVisibleText("TN");
+        tel.selectByVisibleText("TN");
 
         driver.findElement(By.id("contactPhoneNumberDigits")).sendKeys("50133970");
         driver.findElement(By.id("email")).sendKeys("methniimen@gmail.com");
+
+         WebElement R7= driver.findElement(By.id("club_none"));
+         R7.click();
 
         WebElement R5 = driver.findElement(By.id("commercialOffers_false"));
         R5.click();
@@ -61,8 +71,11 @@ public class MyFirstActionSelenium {
         WebElement R6 = driver.findElement(By.id("optin_survey_false"));
         R6.click();
 
-*/
+        WebElement check = driver.findElement(By.id("share-data-conscent"));
+        check.click();
 
+        WebElement BoutonCreerMonCompte = driver.findElement(By.className("button  button--full "));
+        BoutonCreerMonCompte.click();
 
         // Fermer le navigateur
         driver.quit();
