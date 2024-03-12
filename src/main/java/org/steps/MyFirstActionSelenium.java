@@ -30,12 +30,14 @@ public class MyFirstActionSelenium {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
 
-        WebDriver driver = new ChromeDriver(options);
-
-        // Initialisation de ExtentReports avec ExtentSparkReporter
+        driver = new ChromeDriver(options); // Initialisation du champ driver de la classe
         ExtentSparkReporter spark = new ExtentSparkReporter("Spark.html");
         extentReports = new ExtentReports();
         extentReports.attachReporter(spark);
+
+        // Initialisation de extentTest
+        extentTest = extentReports.createTest("MyFirstActionSeleniumTest");
+
     }
 
     @Given("Je suis sur la page d'accueil du site web")
@@ -52,19 +54,15 @@ public class MyFirstActionSelenium {
 
     @And("Je choisis l'option {string}")
     public void je_choisis_l_option(String option) {
-        driver.findElement(By.xpath("//div[@class='select']"))
-                .click();
-        driver.findElement(By.xpath("//li[@data-value='I']"))
-                .click();
-        driver.findElement(By.xpath("//li[@data-value='IVH00000']"))
-                .click();
+        driver.findElement(By.xpath("//div[@class='select']")).click();
+        driver.findElement(By.xpath("//li[@data-value='I']")).click();
+        driver.findElement(By.xpath("//li[@data-value='IVH00000']")).click();
         extentTest.log(Status.INFO, "Je choisis l'option '" + option + "'");
     }
 
     @And("Je suis {string}")
     public void je_suis(String role) {
-        driver.findElement(By.xpath("//div[@id='dprivate_ad']"))
-                .click();
+        driver.findElement(By.xpath("//div[@id='dprivate_ad']")).click();
         extentTest.log(Status.INFO, "Je suis '" + role + "'");
     }
 
@@ -77,29 +75,25 @@ public class MyFirstActionSelenium {
 
     @And("Je saisis le titre {string}")
     public void je_saisis_le_titre(String title) {
-        driver.findElement(By.id("titre"))
-                .sendKeys(title);
+        driver.findElement(By.id("titre")).sendKeys(title);
         extentTest.log(Status.INFO, "Je saisis le titre '" + title + "'");
     }
 
     @And("Je saisis la description {string}")
     public void je_saisis_la_description(String description) {
-        driver.findElement(By.id("descBien"))
-                .sendKeys(description);
+        driver.findElement(By.id("descBien")).sendKeys(description);
         extentTest.log(Status.INFO, "Je saisis la description '" + description + "'");
     }
 
     @And("Je saisis la surface {string}")
     public void je_saisis_la_surface(String surface) {
-        driver.findElement(By.id("superficie"))
-                .sendKeys(surface);
+        driver.findElement(By.id("superficie")).sendKeys(surface);
         extentTest.log(Status.INFO, "Je saisis la surface '" + surface + "'");
     }
 
     @And("Je coche la case {string}")
     public void je_coche_la_case(String checkbox) {
-        driver.findElement(By.xpath("//div[@id='bloc_flagSurfaceCarrez_1']"))
-                .click();
+        driver.findElement(By.xpath("//div[@id='bloc_flagSurfaceCarrez_1']")).click();
         extentTest.log(Status.INFO, "Je coche la case '" + checkbox + "'");
     }
 
