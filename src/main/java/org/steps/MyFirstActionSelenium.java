@@ -110,17 +110,17 @@ public class MyFirstActionSelenium {
         extentTest.log(Status.INFO, "Je saisis le nombre de pièces '" + pieces + "'");
     }
 
-    @And("Je saisis l'annee de construction {string}")
-    public void je_saisis_l_annee_de_construction(String year) {
-        driver.findElement(By.id("anneeConstruction"))
-                .sendKeys(year);
+    @And("je saisis l'annee de construction {string}")
+    public void jeSaisisLAnneeDeConstruction(String year) {
+
+        driver.findElement(By.id("anneeConstruction")).sendKeys(year);
         extentTest.log(Status.INFO, "Je saisis l'année de construction '" + year + "'");
     }
 
-    @And("Je coche la case d'investissement {string}")
-    public void je_coche_la_case_d_investissement(String investment) {
-        driver.findElement(By.xpath("//div[@id='bloc_investissement_1']"))
-                .click();
+    @And("je coche la case d'investissement {string}")
+    public void jeCocheLaCaseDInvestissement(String investment) {
+
+        driver.findElement(By.xpath("//div[@id='bloc_investissement_1']")).click();
         extentTest.log(Status.INFO, "Je coche la case d'investissement '" + investment + "'");
     }
 
@@ -134,4 +134,7 @@ public class MyFirstActionSelenium {
         driver.quit();
         extentReports.flush();
     }
+
+
+
 }
