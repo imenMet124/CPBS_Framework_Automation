@@ -1,4 +1,4 @@
-package pages;
+package org.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -53,6 +53,7 @@ public class DeposerAnnoncePage {
     public void personne() {
         btnParticulier.click();
     }
+
     public void selectCategorie(String type) {
         Select select = new Select(categ);
         select.selectByVisibleText(type);

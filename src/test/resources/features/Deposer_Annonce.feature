@@ -4,8 +4,6 @@ Feature: Déposer une annonce
     Given Je suis sur la page d'accueil du site web
     When Je clique sur "Déposer une annonce gratuite"
     And Je clique sur "Choisir une catégorie"
-    And Je choisis l'option "IMMOBILIER"
-    And Je choisis l'option "Vente immobilier"
     And Je suis "Particulier"
     And Je choisis le type "Appartement"
     And Je saisis le titre "Un appartement en bon état"

@@ -1,4 +1,4 @@
-package pages;
+package org.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,13 +11,19 @@ public class HomePage {
     WebDriver driver;
 
     @FindBy(linkText = "Déposer une annonce gratuite")
-    WebElement BtnDeposer;
+    WebElement BoutonDeposerAnnonce;
+    @FindBy(linkText = "Compte")
+    WebElement BoutonCompte;
+
 
     public HomePage (WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }
-    public void clickOnDeposer(){
-        BtnDeposer.click();
+    public void ClickPourDeposer(){
+        BoutonDeposerAnnonce.click();
+    }
+    public void ClickPourCompte(){
+        BoutonCompte.click();
     }
 }
