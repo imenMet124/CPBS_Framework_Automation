@@ -3,6 +3,7 @@ Feature:Creer un compte
   Scenario: creer un nouveau compte
     Given Je suis sur la page d'accueil du site web
     When Je clique sur l'icone "Compte"
+
     Then Je clique sur "inscrivez-vous gratuitement"
     And Je saisis le mail
     And Je saisis le prenom

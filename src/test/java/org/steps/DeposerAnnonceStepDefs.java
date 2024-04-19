@@ -1,4 +1,4 @@
-package steps;
+package org.steps;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -101,9 +101,7 @@ public class DeposerAnnonceStepDefs {
     }
 
     @And("je coche la case dinvestissement investissement")
-    public void JeCocheLaCaseInvestissementInvestissement() {
-        Deposer_Annonce.checkInvest();
-    }
+    public void JeCocheLaCaseInvestissementInvestissement() {Deposer_Annonce.checkInvest();}
 
 
 }

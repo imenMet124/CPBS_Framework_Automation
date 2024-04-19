@@ -26,10 +26,9 @@ public class CreerCompteStepDefs {
 
     }
 
-    @When( "Je clique sur l'icone Compte")
-    public void je_clique_sur_l_icone_Compte() {
-        creerComptePage.cliquerSurIconeCompte();
-    }
+    @When("Je clique sur licone Compte")
+    public void je_clique_sur_l_icone_Compte() { creerComptePage.cliquerSurIconeCompte();}
+
     @Then("Je clique sur inscrivez vous gratuitement")
     public void Jecliquesurinscrivezvousgratuitement (){
         creerComptePage.clickBoutonInscription();
