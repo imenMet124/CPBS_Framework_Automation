@@ -1,108 +1,79 @@
 package org.steps;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.BeforeTest;
 import org.pages.DeposerAnnoncePage;
-import org.pages.HomePage;
-
-import java.util.concurrent.TimeUnit;
 
 public class DeposerAnnonceStepDefs {
      WebDriver driver;
+    DeposerAnnoncePage Deposer_Annonce ;
 
-    DeposerAnnoncePage Deposer_Annonce = new DeposerAnnoncePage(driver);
-
-
-    @BeforeTest
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\CPBS_Framework_Automation\\drivers\\chromedriver.exe");
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://www.paruvendu.fr/");
-
+@Before
+private void setUpDriver() {
+    System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
+    driver = new ChromeDriver();
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    driver.get("https://www.paruvendu.fr/");
+    js.executeScript("cmp_pv.cookie.saveConsent(true);");
+    driver.manage().window().maximize();
+}
+    @Given("Je suis sur la page d'accueil du site web")
+    public void je_suis_sur_la_page_du_site_web() {
+        setUpDriver(); // Appel de la méthode pour initialiser le driver
+        Deposer_Annonce = new DeposerAnnoncePage(driver);
     }
-
-    @Given("^Je suis sur la page d'accueil du site web$")
-    public void Home_Page() {
-        HomePage home_page = new HomePage(driver);
-        home_page.ClickPourDeposer();
+    @When("Je clique sur Déposer une annonce gratuite")
+    public void je_cliqueur_une_annonce_gratuite() {
+        Deposer_Annonce.cliqueBtnAnnonce();
     }
-
-
-    @When("Je clique surDeposer une annonce gratuite")
-    public void JeCliquesurDeposerUneAnnonce() {
+    @And ("Je clique sur Choisir une catégorie")
+    public void Je_clique_sur_Choisir_une_catégorie(){
         Deposer_Annonce.choisirAnnonce();
     }
-
-    @And("Je clique sur Choisir une catégorie")
-    public void JecliquesurChoisirunecatégorie() {
-        Deposer_Annonce.selectCategorie("Appartement");
-
-    }
-
-
-    @And("je choisis l'option IMMOBILIER")
-    public void jechoisisloptionIMMOBILIER() {
-        Deposer_Annonce.choisirAnnonce();
-
-    }
-
-    //And Je choisis l'option "Vente immobilier"
-    @And("Je suis Particulier")
-    public void JesuisParticulier() {
+    @And ("Je suis Particulier")
+    public void Je_suis_particulier() {
         Deposer_Annonce.personne();
     }
-
-    @And("Je choisis le type Appartement")
-    public void JeChoisisleTypeAppartement() {
+    @And ("Je choisis le type Appartement")
+    public void Je_choisis_le_type_Appartement() {
         Deposer_Annonce.selectCategorie("Appartement");
     }
-
-
     @And("Je saisis le titre Un appartement en bon état")
     public void JeSaisisLeTitreUnAppartementEnBon() {
         Deposer_Annonce.saisirTitre("Un appartement en bon état");
     }
-
     @And("Je saisis la description Un appartement en bon état")
     public void JeSaisisLaDescriptionUnAppartementEnBon() {
         Deposer_Annonce.saisirDescrip("Un appartement en bon état");
-
     }
-
     @And("Je saisis la surface 200")
-    public void JeSaisisLaSurface() {
+    public void JeSaisisLaSurface(){
         Deposer_Annonce.saisirSurface("200");
     }
-
     @And("Je coche la case Surface Loi Carrez")
     public void JeCocheLaCaseSurfaceLoiCarrez() {
-        Deposer_Annonce.saisirSurface("Loi Carrez");
+        Deposer_Annonce.cocherSurface();
     }
-
-    @And("Je saisis le nombre de pièces ")
-    public void JeSaisisLeNombreDePieces() {
+   @And("Je saisis le nombre de pièces 3")
+    public void JeSaisisLeNombreDePieces3() {
         Deposer_Annonce.selectNbPiece("3");
-
     }
-
-    @And("je saisis l'annee de construction 2020")
-    public void JeSaisisLLaAnneeDeConstruction2020() {
+    @And ("je saisis l'annee de construction")
+            public void JeSaisisLLaAnneeDeConstruction() {
         Deposer_Annonce.saisirAnneeContruction("2020");
-
     }
-
-    @And("je coche la case dinvestissement investissement")
-    public void JeCocheLaCaseInvestissementInvestissement() {Deposer_Annonce.checkInvest();}
-
-
+    @And("je coche la case d'investissement")
+    public void jeCocheLaCaseDInvestissement() {
+        Deposer_Annonce.checkinvest();
+    }
+    @After
+    public void tearDown(){
+        driver.quit();
+    }
 }
-

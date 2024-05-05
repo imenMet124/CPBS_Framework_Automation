@@ -1,58 +1,84 @@
-package steps;
-
+package org.steps;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.configuration.Theme;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.pages.CreerComptePage;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
-import java.util.concurrent.TimeUnit;
+public class CreerCompteStepDefs{
+   private  WebDriver driver;
+    private CreerComptePage creerCompte;
+    private ExtentReports extentReports;
+    @Before
+    private void setUpDriver() throws IOException {
 
-public class CreerCompteStepDefs {
-    WebDriver driver;
-    CreerComptePage creerComptePage = new CreerComptePage(driver);
+        String reportPath = "extent-report.html";
 
 
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\CPBS_Framework_Automation\\drivers\\chromedriver.exe");
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        FileInputStream fis= new FileInputStream("C:\\CPBS_Framework_Automation\\src\\test\\resources\\configuration\\config.properties");
+         Properties p = new Properties();
+         p.load(fis);
+         String browser = p.getProperty("browser");
+         String chromeDriver = p.getProperty("chromeDriver");
+         String url= p.getProperty("url");
+        System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
+        driver = new ChromeDriver();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         driver.get("https://www.paruvendu.fr/");
-
+        js.executeScript("cmp_pv.cookie.saveConsent(true);");
+        driver.manage().window().maximize();
     }
+    @Given("Je suis sur la page d'accueil")
+    public void je_suis_sur_la_page_dacceuil() throws IOException {
 
-    @When("Je clique sur licone Compte")
-    public void je_clique_sur_l_icone_Compte() { creerComptePage.cliquerSurIconeCompte();}
-
-    @Then("Je clique sur inscrivez vous gratuitement")
-    public void Jecliquesurinscrivezvousgratuitement (){
-        creerComptePage.clickBoutonInscription();
+        setUpDriver(); // Appel de la méthode pour initialiser le driver
+        creerCompte = new CreerComptePage(driver);
     }
-
-   @And("Je saisis le mail")
-   public void je_saisis_le_mail() {
-        creerComptePage.saisirMail("methniimen@gmail.com");
-   }
-
+   @When("Je clique sur licone Compte")
+    public void je_clique_sur_l_icone_Compte() {
+        creerCompte.cliquer_Sur_Icone_Compte();
+    }
+    @Then("Je clique sur inscrivez-vous gratuitement")
+    public void Je_clique_sur_inscrivez_vous_gratuitement(){
+        creerCompte.clickBoutonInscription();
+    }
+    @And ("Je saisis le mail du compte")
+    public void je_saisis_le_mail_du_compte() {
+        creerCompte.saisirMail("yas@gmail.com");
+    }
     @And ("Je saisis le prenom")
     public void je_saisis_le_prenom() {
-        creerComptePage.saisirPrenom("imen");
+        creerCompte.saisirPrenom("imen");
     }
     @And ("Je saisis le nom")
     public void je_saisis_le_nom() {
-        creerComptePage.saisirNom("methni");
+        creerCompte.saisirNom("methni");
     }
     @And ("Je saisis la ville")
     public void je_saisis_la_ville() {
-        creerComptePage.saisirVille("Toulouse");
+        creerCompte.saisirVille("Toulouse");
     }
-    @And ("je clique sur le bouton Me connecter ")
-    public void je_clique_sur_le_bouton_me_connecter() {
-        creerComptePage.clickBoutonCreerCompte();
+    @And ("je clique sur le bouton meConnecter")
+    public void je_clique_sur_le_bouton_meConnecter() {
+        creerCompte.clickBoutonCreerCompte();
+
+    }
+    @After
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

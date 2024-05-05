@@ -1,2 +1,64 @@
-package org.steps;public class RechercheStepDefs {
+package org.steps;
+
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.pages.RecherchePage;
+import org.pages.SeConnecterPage;
+
+public class RechercheStepDefs {
+    WebDriver driver;
+    RecherchePage Recherche;
+    @Before
+    private void setUpDriver() {
+        System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
+        driver = new ChromeDriver();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        driver.get("https://www.paruvendu.fr/");
+        js.executeScript("cmp_pv.cookie.saveConsent(true);");
+        driver.manage().window().maximize();
+    }
+    @Given("Je suis sur le site")
+    public void je_suis_sur_le_site() {
+        setUpDriver(); // Appel de la méthode pour initialiser le driver
+        Recherche = new RecherchePage(driver);
+
+    }
+    @When ("Je clique sur icone recherche")
+    public void je_clique_recherche() {
+        Recherche.cliquerSurIconeRecherche();
+    }
+    @Then("Je clique sur la liste des choix")
+    public void je_clique_recherche_des_choix() {
+        Recherche.cliquerListeChoix();
+
+    }
+    @And("je clique sur le choix")
+    public void je_clique_recherche_le_choix() {
+        Recherche.CliquerChoix();
+    }
+
+    @And("Je saisis la localisation voulu")
+    public void je_saisis_la_localisation_voulu() {
+        Recherche.saisirLocalisation("Paris");
+
+    }
+    @And("je clique sur le bouton rechercher")
+    public void je_clique_rechercher_rechercher() {
+        Recherche.cliquerBtnRecherche();
+    }
+    @Then("je choisis l'annonce")
+    public void je_choisis_l_annonce() {
+        Recherche.cliquerResultat();
+   }
+    @After
+    public void tearDown(){
+        driver.quit();
+    }
 }
