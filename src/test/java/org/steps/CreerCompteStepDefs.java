@@ -20,11 +20,8 @@ import java.util.Properties;
 public class CreerCompteStepDefs{
    private  WebDriver driver;
     private CreerComptePage creerCompte;
-    private ExtentReports extentReports;
     @Before
     private void setUpDriver() throws IOException {
-
-        String reportPath = "extent-report.html";
 
 
         FileInputStream fis= new FileInputStream("C:\\CPBS_Framework_Automation\\src\\test\\resources\\configuration\\config.properties");
@@ -33,10 +30,10 @@ public class CreerCompteStepDefs{
          String browser = p.getProperty("browser");
          String chromeDriver = p.getProperty("chromeDriver");
          String url= p.getProperty("url");
-        System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
+        System.setProperty(browser, chromeDriver);
         driver = new ChromeDriver();
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        driver.get("https://www.paruvendu.fr/");
+        driver.get(url);
         js.executeScript("cmp_pv.cookie.saveConsent(true);");
         driver.manage().window().maximize();
     }

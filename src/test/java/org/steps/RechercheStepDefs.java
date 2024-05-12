@@ -12,20 +12,32 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.pages.RecherchePage;
 import org.pages.SeConnecterPage;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 public class RechercheStepDefs {
     WebDriver driver;
     RecherchePage Recherche;
     @Before
-    private void setUpDriver() {
-        System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
+    private void setUpDriver() throws IOException {
+
+        FileInputStream fis= new FileInputStream("C:\\CPBS_Framework_Automation\\src\\test\\resources\\configuration\\config.properties");
+        Properties p = new Properties();
+        p.load(fis);
+        String browser = p.getProperty("browser");
+        String chromeDriver = p.getProperty("chromeDriver");
+        String url= p.getProperty("url");
+
+        System.setProperty(browser, chromeDriver);
         driver = new ChromeDriver();
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        driver.get("https://www.paruvendu.fr/");
+        driver.get(url);
         js.executeScript("cmp_pv.cookie.saveConsent(true);");
         driver.manage().window().maximize();
     }
     @Given("Je suis sur le site")
-    public void je_suis_sur_le_site() {
+    public void je_suis_sur_le_site() throws IOException {
         setUpDriver(); // Appel de la méthode pour initialiser le driver
         Recherche = new RecherchePage(driver);
 

@@ -1,6 +1,6 @@
-@sign_in
-Feature:se connecter
 
+Feature:se connecter
+  @sign_in
   Scenario: se connecter avec des conditions valides
 
     Given Je suis sur la page accueil du site web
@@ -12,6 +12,7 @@ Feature:se connecter
     And je clique sur le bouton Me connecter
 
   Scenario: se connecter avec des conditions non valides
+
     Given Je suis sur la page accueil du site web
     When Je clique sur icone Compte
     Then Je clique sur connectez-vous

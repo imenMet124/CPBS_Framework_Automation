@@ -13,3 +13,23 @@ import org.junit.runner.RunWith;
 public class TestRunner  {
 
 }
+
+//package org.runners;
+//
+//import org.junit.runner.RunWith;
+//
+//import io.cucumber.junit.Cucumber;
+//import io.cucumber.junit.CucumberOptions;
+//
+//@RunWith(Cucumber.class)
+//@CucumberOptions(features = "src/test/resources/features",
+//        glue = { "Steps" },
+//        tags = "@nv_compte",
+//        plugin = { "pretty", "html:target/test-output.html", "json:target/cucumber.json",
+//                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+//        dryRun = false,
+//        monochrome = true
+//)
+//public class TestRunner {
+//
+//}
