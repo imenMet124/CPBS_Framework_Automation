@@ -34,7 +34,12 @@
               <projectName>CPBS_Framework_Automation</projectName>
               <outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
               <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
+              <systemPropertyVariables>
+              <extent.reporter.spark.start>true</extent.reporter.spark.start>
+              <extent.reporter.spark.out>target/htmlreports/report.html</extent.reporter.spark.out>
+              </systemPropertyVariables>
             </configuration>
+
           </execution>
         </executions>
       </plugin>
@@ -87,11 +92,7 @@
       <version>30.1.1-jre</version>
     </dependency>
 
-    <dependency>
-      <groupId>com.aventstack</groupId>
-      <artifactId>extentreports</artifactId>
-      <version>5.1.1</version>
-    </dependency>
+
 
     <dependency>
       <groupId>io.cucumber</groupId>
@@ -133,11 +134,7 @@
       <artifactId>extentreports-cucumber7-adapter</artifactId>
       <version>1.14.0</version>
     </dependency>
-    <dependency>
-      <groupId>com.aventstack</groupId>
-      <artifactId>extentreports</artifactId>
-      <version>5.1.1</version>
-    </dependency>
+
     <dependency>
       <groupId>com.aventstack</groupId>
       <artifactId>extentreports-cucumber4-adapter</artifactId>
@@ -153,8 +150,17 @@
         </exclusion>
       </exclusions>
     </dependency>
-    
-
+    <dependency>
+      <groupId>com.aventstack</groupId>
+      <artifactId>extentreports</artifactId>
+      <version>5.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>tech.grasshopper</groupId>
+      <artifactId>extentreports-cucumber6-adapter</artifactId>
+      <version>2.1.0</version>
+    </dependency>
   </dependencies>
+
 
 </project>

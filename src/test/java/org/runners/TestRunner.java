@@ -1,19 +1,21 @@
 package org.runners;
-
-
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
-
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"src/test/resources/features"},
+@CucumberOptions(features = "src/test/resources/features",
         glue = "org/steps",
-        tags = "@nv_compte",
-        plugin = {"json:target/cucumber.json","html:target/site/CPBS_Report.html"})
+        tags = "@nv_compte" ,
+        plugin = {"summary",
+                "pretty",
+                "html:target/test-output.html",
+                "json:target/cucumber.json",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+        monochrome = true)
 public class TestRunner  {
 
 }
-
+//"summary","pretty","json:target/cucumber.json","html:target/site/htmlreports.html",
 //package org.runners;
 //
 //import org.junit.runner.RunWith;

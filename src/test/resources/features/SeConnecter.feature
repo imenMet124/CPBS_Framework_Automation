@@ -1,6 +1,6 @@
-
+@sign_in
 Feature:se connecter
-  @sign_in
+
   Scenario: se connecter avec des conditions valides
 
     Given Je suis sur la page accueil du site web

@@ -19,23 +19,23 @@ public class DeposerAnnonceStepDefs {
     DeposerAnnoncePage Deposer_Annonce ;
 
 @Before
-private void setUpDriver() throws IOException {
-    FileInputStream fis= new FileInputStream("C:\\CPBS_Framework_Automation\\src\\test\\resources\\configuration\\config.properties");
-    Properties p = new Properties();
-    p.load(fis);
-    String browser = p.getProperty("browser");
-    String chromeDriver = p.getProperty("chromeDriver");
-    String url= p.getProperty("url");
+private void setUpDriver()  {
+//    FileInputStream fis= new FileInputStream("C:\\CPBS_Framework_Automation\\src\\test\\resources\\configuration\\config.properties");
+//    Properties p = new Properties();
+//    p.load(fis);
+//    String browser = p.getProperty("browser");
+//    String chromeDriver = p.getProperty("chromeDriver");
+//    String url= p.getProperty("url");
 
-    System.setProperty(browser, chromeDriver);
+    System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
     driver = new ChromeDriver();
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    driver.get(url);
+    driver.get("https://www.paruvendu.fr/");
     js.executeScript("cmp_pv.cookie.saveConsent(true);");
     driver.manage().window().maximize();
 }
     @Given("Je suis sur la page d'accueil du site web")
-    public void je_suis_sur_la_page_du_site_web() throws IOException {
+    public void je_suis_sur_la_page_du_site_web()  {
         setUpDriver(); // Appel de la méthode pour initialiser le driver
         Deposer_Annonce = new DeposerAnnoncePage(driver);
     }

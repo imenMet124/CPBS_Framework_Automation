@@ -22,17 +22,17 @@ public class SeConnecterStepDefs {
     SeConnecterPage seConnecter;
     @Before
     private void setUpDriver() throws IOException {
-        FileInputStream fis= new FileInputStream("C:\\CPBS_Framework_Automation\\src\\test\\resources\\configuration\\config.properties");
-        Properties p = new Properties();
-        p.load(fis);
-        String browser = p.getProperty("browser");
-        String chromeDriver = p.getProperty("chromeDriver");
-        String url= p.getProperty("url");
+//        FileInputStream fis= new FileInputStream("C:\\CPBS_Framework_Automation\\src\\test\\resources\\configuration\\config.properties");
+//        Properties p = new Properties();
+//        p.load(fis);
+//        String browser = p.getProperty("browser");
+//        String chromeDriver = p.getProperty("chromeDriver");
+//        String url= p.getProperty("url");
 
-        System.setProperty(browser, chromeDriver);
+        System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
         driver = new ChromeDriver();
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        driver.get(url);
+        driver.get("https://www.paruvendu.fr/");
         js.executeScript("cmp_pv.cookie.saveConsent(true);");
         driver.manage().window().maximize();
     }
@@ -49,19 +49,19 @@ public class SeConnecterStepDefs {
     public void je_clique_sur_connectez_vous() {
         seConnecter.cliquerBoutonConnectezVous();
     }
-    @Then("Je saisis le mail")
+    @And("Je saisis le mail")
     public void je_saisis_le_mail() {
         seConnecter.saisirMail("methniimen@gmail.com");
     }
-    @Then("je clique sur le bouton continue")
+    @And("je clique sur le bouton continue")
     public void je_clique_sur_le_bouton_continue() {
         seConnecter.cliqueContinue();
     }
-    @Then("Je saisis le mot de passe")
+    @And("Je saisis le mot de passe")
     public void je_saisis_le_mot_de_passe() {
         seConnecter.saisirMDP("imen@BAC2021");
     }
-    @Then("je clique sur le bouton Me connecter")
+    @And("je clique sur le bouton Me connecter")
     public void je_clique_sur_le_bouton_me_connecter() {
         seConnecter.cliqueBoutonconnecter();
     }

@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,24 +22,23 @@ public class CreerCompteStepDefs{
    private  WebDriver driver;
     private CreerComptePage creerCompte;
     @Before
-    private void setUpDriver() throws IOException {
+    private void setUpDriver() {
 
-
-        FileInputStream fis= new FileInputStream("C:\\CPBS_Framework_Automation\\src\\test\\resources\\configuration\\config.properties");
-         Properties p = new Properties();
-         p.load(fis);
-         String browser = p.getProperty("browser");
-         String chromeDriver = p.getProperty("chromeDriver");
-         String url= p.getProperty("url");
-        System.setProperty(browser, chromeDriver);
+//        FileInputStream fis= new FileInputStream("C:\\CPBS_Framework_Automation\\src\\test\\resources\\configuration\\config.properties");
+//         Properties p = new Properties();
+//         p.load(fis);
+//         String browser = p.getProperty("browser");
+//         String chromeDriver = p.getProperty("chromeDriver");
+//         String url= p.getProperty("url");
+        System.setProperty("webdriver.chrome.driver", "drivers\\chromedriver.exe");
         driver = new ChromeDriver();
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        driver.get(url);
+        driver.get("https://www.paruvendu.fr/");
         js.executeScript("cmp_pv.cookie.saveConsent(true);");
         driver.manage().window().maximize();
     }
     @Given("Je suis sur la page d'accueil")
-    public void je_suis_sur_la_page_dacceuil() throws IOException {
+    public void je_suis_sur_la_page_dacceuil()  {
 
         setUpDriver(); // Appel de la méthode pour initialiser le driver
         creerCompte = new CreerComptePage(driver);

@@ -2,7 +2,6 @@
 Feature:rechreche
 
   Scenario: recherche avec des conditions valides
-
     Given Je suis sur le site
     When Je clique sur icone recherche
     Then Je clique sur la liste des choix
@@ -12,7 +11,6 @@ Feature:rechreche
     Then je choisis l'annonce
 
   Scenario: recherche avec des conditions non valides
-
     Given Je suis sur le site
     When Je clique sur icone recherche
     Then Je clique sur la liste des choix
